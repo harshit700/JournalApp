@@ -1,6 +1,7 @@
 package com.edigest.myFirstProject.controller;
 
 import com.edigest.myFirstProject.entity.JournalEntry;
+import org.bson.types.ObjectId;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.Map;
 @RequestMapping("/journal")
 public class JournalEntryController {
 
-    private Map<Long, JournalEntry> journalEntries = new HashMap<>();
+    private Map<ObjectId, JournalEntry> journalEntries = new HashMap<>();
 
     @GetMapping
     public List<JournalEntry> getAll(){
@@ -26,17 +27,17 @@ public class JournalEntryController {
     }
 
     @GetMapping("id/{myId}")
-    public JournalEntry getJournalEntryById(@PathVariable Long myId){
+    public JournalEntry getJournalEntryById(@PathVariable ObjectId myId){
         return journalEntries.get(myId);
     }
 
     @DeleteMapping("id/{myId}")
-    public JournalEntry deleteJournalEntryById(@PathVariable Long myId){
+    public JournalEntry deleteJournalEntryById(@PathVariable ObjectId myId){
         return journalEntries.remove(myId);
     }
 
     @PutMapping("id/{myId}")
-    public JournalEntry updateJournalEntryById(@PathVariable Long myId, @RequestBody JournalEntry myEntry ){
+    public JournalEntry updateJournalEntryById(@PathVariable ObjectId myId, @RequestBody JournalEntry myEntry ){
         return journalEntries.put(myId, myEntry);
     }
 }
